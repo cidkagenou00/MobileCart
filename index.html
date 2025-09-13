@@ -41,15 +41,18 @@
       background:#1e3a8a ;
       color: #e0f2fe;
       border: none;
-      position:relative;
+      position:fixed;
+      top:15px;
+      right:20px;
       
-   
-      z-index: 2222;
+      z-index:3000;
       border-radius: 10px;
-      
+      transition:background:0.3s ,transform 0.3s;
     }
-
-  
+  .menu-btn:hover{
+    background:#1d4ed8;
+    transform:scale(1.1);
+  }
     /* Search */
     .search-bar {
       display: flex;
@@ -247,7 +250,7 @@ overlay-menu{
       color:#1e293b;
       cursor:pointer;
       }
-      .overlay-menu {
+ .overlay-menu {
       height: 100%;
       width: 200px;
       position: fixed;
