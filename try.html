@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+ 
+  <title>Mobile Shop</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background: #f8fafc;
+      color: #111;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background: #111;
+      color: white;
+      position: relative;
+      top: 0;
+      z-index: 1000;
+    }
+    header h1 {
+      font-size: 20px;
+    }
+
+    /* Menu Button */
+    .menu-btn {
+       font-size: 24px;
+      padding: 10px 20px;
+      cursor: pointer;
+      background:#1e3a8a ;
+      color: #e0f2fe;
+      border: none;
+      position:relative;
+      
+   
+      z-index: 2222;
+      border-radius: 10px;
+      
+    }
+
+  
+    /* Search */
+    .search-bar {
+      display: flex;
+      gap: 10px;
+      padding: 15px;
+      background: #f1f5f9;
+      align-items: center;
+    }
+    .search-bar input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .cancel-btn {
+      padding: 10px 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      background: #ef4444;
+      color: white;
+    }
+
+    /* card Grid */
+    .products {
+      display:grid;
+      max-height:100%;
+         grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+      }
+    .card{
+      background:white;
+      border-radius:12px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1);
+      padding:20px;
+      text-align:center;
+      transition:transform .3s;
+      }
+.card:hover {
+      transform:translateY(-10px); scale(1.05);
+      }
+.card img {
+      max-width:100%;
+      border-radius:8px;
+      }
+.card h3 {
+      margin:15px 0 5px;
+      font-size:20px;
+      color:#0f172a;
+      }
+.card p {
+      color:#475569;
+      font-size:16px;
+      }
+    .view-btn {
+      margin-top: 10px;
+      display: inline-block;
+      padding: 8px 12px;
+      background: #16a34a;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+    .view-btn:hover {
+      background: #15803d;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1002;
+      animation: fadeBg 0.3s ease;
+    }
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 400px;
+      width: 90%;
+      text-align: left;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      animation: fadeIn 0.3s ease;
+    }
+    .modal-content h2 {
+      margin-bottom: 10px;
+    }
+    .modal-content ul {
+      list-style: none;
+      padding: 0;
+    }
+    .modal-content ul li {
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: #333;
+    }
+    .close-btn {
+      background: #ef4444;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: background 0.3s;
+    }
+    .close-btn:hover {
+      background: #b91c1c;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes fadeBg {
+      from { background: rgba(0,0,0,0); }
+      to { background: rgba(0,0,0,0.6); }
+    }
+    
+    
+@media(max-width:768px){
+header{
+      flex-direction:column;
+      align-items:flex-start;
+      padding:15px 20px;
+      display:flex;
+     
+      }
+nav ul {
+      flex-direction:column;
+      width:100%;
+      gap:5px;
+}
+.search-container {
+      width:100%;
+}
+#searchBox,#cancelBtn {
+      width:100%;
+}
+.menu-btn{
+   position:relative;
+   font-size: 10px;
+  
+  
+}
+overlay-menu{
+   width: 100px;
+}
+.hero.contact {
+      background:#f0fdfa;
+      font-size:15px;
+      }
+.overlay-menu a{
+         font-size:5px;
+      }
+
+}
+
+    #noResults {
+      margin-top:5px;
+      color:red;
+      font-weight:bold;
+      display:none;
+      text-align:center;
+      }
+      .search-container {
+      display:flex;
+      gap:10px;
+      margin-bottom:20px;
+      flex-wrap:wrap;
+      justify-content:center;
+      }
+#searchBox {
+      padding:8px 12px;
+      border-radius:5px;
+      border:1px solid #ccc;
+      width:450px;
+      }
+#cancelBtn {
+      padding:8px 12px;
+      border:none;
+      border-radius:5px;
+      background:#facc15;
+      color:#1e293b;
+      cursor:pointer;
+      }
+      .overlay-menu {
+      height: 100%;
+      width: 200px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      
+      background:black;
+      z-index: 2002;
+      padding-top: 60px;
+      
+      /* Smooth slide */
+      transform: translateX(-100%);
+      transition: transform 0.4s ease;
+    }
+
+    /* Show menu */
+    .overlay-menu.active {
+      transform: translateX(0);
+    }
+
+    /* Links inside menu */
+    .overlay-menu a {
+    border-radius: 10px;
+      display: block;
+      padding: 12px 20px;
+      font-size: 20px;
+      color:white;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .overlay-menu a:hover {
+      background: grey;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>📱 Mobile Hub</h1>
+    <span class="menu-btn" onclick="toggleMenu()">☰</span>
+  </header>
+
+  <!-- Side Menu -->
+  <div id="menu" class="overlay-menu">
+    <a href="#header">Home</a>
+    <a href="#products">Mobiles</a>
+    <a href="#">Accessories</a>
+    <a href="#">Contact</a>
+  </div>
+<br>
+<br>
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <input type="text" id="searchBox" placeholder="Search by product name...">
+    <button id="cancelBtn">Cancel</button>
+  </div>
+
+  <!-- Products Grid -->
+  <section class="products" id="productGrid" id="itemList" >
+     
+    <div class="card" 
+    data-name="iPhone 14 Pro" data-specs="Processor: A16 Bionic; Storage: 128GB; Display: 6.1&quot;; Price: $999">
+      <img src="https://via.placeholder.com/250x150" alt="iPhone">
+      <h3>iPhone 14 Pro</h3>
+      <ul>
+        <p>Processor: A16 Bionic</p>
+        <p>Storage: 128GB</p>
+        <p>Display: 6.1"</p>
+        <p>Price: $999</p>
+      </ul>
+      <button class="view-btn" onclick="openModal(this)">View Details</button>
+    </div>
+
+    <div class="card" data-name="Samsung Galaxy S23" data-specs="Processor: Snapdragon 8 Gen 2; Storage: 256GB; Display: 6.6&quot;; Price: $899">
+      <img src="https://via.placeholder.com/250x150" alt="Samsung">
+      <h3>Samsung Galaxy S23</h3>
+   
+        <p>Processor: Snapdragon 8 Gen 2</p>
+        <p>Storage: 256GB</p>
+        <p>Display: 6.6"</p>
+        <p>Price: $899</p>
+     
+      <button class="view-btn" onclick="openModal(this)">View Details</button>
+    </div>
+
+    <div class="card" data-name="OnePlus 11" data-specs="Processor: Snapdragon 8 Gen 2; Storage: 128GB; Display: 6.7&quot;; Price: $799">
+      <img src="https://via.placeholder.com/250x150" alt="OnePlus">
+      <h3>OnePlus 11</h3>
+      
+        <p>Processor: Snapdragon 8 Gen 2</p>
+        <p>Storage: 128GB</p>
+        <p>Display: 6.7"</p>
+        <p>Price: $799</p>
+      
+      <button class="view-btn" onclick="openModal(this)">View Details</button>
+    </div>
+
+    <div class="card"
+     data-name="Google Pixel 7" data-specs="Processor: Tensor G2; Storage: 128GB; Display: 6.3&quot;; Price: $699">
+      <img src="https://via.placeholder.com/250x150" alt="Pixel">
+      <h3>Google Pixel 7</h3>
+      
+        <p>Processor: Tensor G2</p>
+        <p>Storage: 128GB</p>
+        <p>Display: 6.3"</p>
+        <p>Price: $699</p>
+    
+      <button class="view-btn" onclick="openModal(this)">View Details</button>
+    </div>
+     <div id="noResults">No results found</div>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal" id="detailsModal">
+    <div class="modal-content">
+      <h2 id="modalTitle"></h2>
+      <ul id="modalSpecs"></ul>
+      <button class="close-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <script>
+ 
+   
+    // Open modal
+    function openModal(button) {
+      const product = button.closest('.card');
+      const title = product.dataset.name;
+      const specs = product.dataset.specs.split(";");
+
+      document.getElementById('modalTitle').innerText = title;
+
+      const specList = document.getElementById('modalSpecs');
+      specList.innerHTML = '';
+      specs.forEach(spec => {
+        if (spec.trim() !== '') {
+          const li = document.createElement('li');
+          li.textContent = spec.trim();
+          specList.appendChild(li);
+        }
+      });
+
+      document.getElementById('detailsModal').style.display = 'flex';
+    }
+
+    // Close modal
+    function closeModal() {
+      document.getElementById('detailsModal').style.display = 'none';
+    }
+
+    // Close modal when clicking outside
+    window.addEventListener('click', (e) => {
+      const modal = document.getElementById('detailsModal');
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+    
+    
+    
+    
+    const searchBox = document.getElementById("searchBox");
+const cancelBtn = document.getElementById("cancelBtn");
+const itemElements = Array.from(document.querySelectorAll("#itemList .card"));
+const noResults = document.getElementById("noResults");
+
+// Filter cards by product name
+function filterByName(query){
+  let found = false;
+  const lowerQuery = query.toLowerCase();
+  itemElements.forEach(card=>{
+    const productName =card.querySelector("h3").textContent.toLowerCase();
+    if(productName.includes(lowerQuery) && query!==""){
+      card.style.display="block";
+      found=true;
+    } else if(query==="") {
+      card.style.display="block";
+    } else {
+      card.style.display="none";
+    }
+  });
+  noResults.style.display = (!found && query!=="") ? "block":"none";
+}
+
+// Search input
+searchBox.addEventListener("input", function(){
+  filterByName(this.value);
+});
+
+// Cancel button
+cancelBtn.addEventListener("click", function(){
+  searchBox.value = "";
+  filterByName("");
+});    
+function toggleMenu() {
+      document.getElementById("menu").classList.toggle("active");
+      
+    }
+  </script>
+</body>
+</html>

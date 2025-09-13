@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>S.K. Mobile Hub</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* Reset */
+* {
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:"Segoe UI",Tahoma,sans-serif;
+}
+body {
+      background:#f8fafc;
+      color:#1e293b;
+}
+
+/* Navbar */
+header {
+      align-items:center;
+      padding:15px 40px;   background:linear-gradient(90deg,#1e3a8a,#3b82f6);
+     
+      
+      z-index:1002;
+      position: relative;
+}
+.logo {
+      font-size:22px;
+      font-weight:bold;
+}
+.logo .img {
+      background-image:url("/Sample project - Acme/img/body.jpg");
+      background-size:cover;
+      background-repeat:no-repeat;
+      width:50px;
+      height:50px;
+      border-radius:50%;
+    
+      position: relative;
+}
+
+
+/* Hero */
+.hero {
+      text-align:center;
+      padding:60px 20px;
+      background:#e0f2fe;
+}
+.hero h1 {
+      font-size:36px;
+      margin-bottom:10px;
+      color:#1e3a8a;
+}
+.hero p {
+      font-size:18px;
+      color:#475569;
+}
+.hand{
+      background:#1e3a8a;
+      color:white;
+      height:50px;
+      width:170px;
+      margin-top:10px;
+      border-radius:20px;
+      border:none;
+      }
+.hand a{
+      text-decoration:none;
+      color:white;
+      }
+
+/* Showcase */
+.showcase {
+      padding:40px 20px;
+      max-width:1200px;
+      margin:auto;
+      }
+.showcase h2 {
+      text-align:center;
+      margin-bottom:20px;
+      font-size:28px;
+      color:#1e3a8a;
+      }
+.search-container {
+      display:flex;
+      gap:10px;
+      margin-bottom:20px;
+      flex-wrap:wrap;
+      justify-content:center;
+      }
+#searchBox {
+      padding:8px 12px;
+      border-radius:5px;
+      border:1px solid #ccc;
+      width:450px;
+      }
+#cancelBtn {
+      padding:8px 12px;
+      border:none;
+      border-radius:5px;
+      background:#facc15;
+      color:#1e293b;
+      cursor:pointer;
+      }
+.grid {
+      display:grid;
+      max-height:100%;
+         grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+      }
+.card {
+      background:white;
+      border-radius:12px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1);
+      padding:20px;
+      text-align:center;
+      transition:transform .3s;
+      }
+.card:hover {
+      transform:translateY(-10px); scale(1.05);
+      }
+.card img {
+      max-width:100%;
+      border-radius:8px;
+      }
+.card h3 {
+      margin:15px 0 5px;
+      font-size:20px;
+      color:#0f172a;
+      }
+.card p {
+      color:#475569;
+      font-size:16px;
+      }
+#noResults {
+      margin-top:5px;
+      color:red;
+      font-weight:bold;
+      display:none;
+      text-align:center;
+      }
+
+/* About & Contact */
+.hero.about {
+      background:#fef9c3;
+      }
+.hero.contact {
+      background:#f0fdfa;
+      font-size:35px;
+      }
+
+/* Responsive */
+@media(max-width:768px){
+
+
+
+header{
+      flex-direction:column;
+      align-items:flex-start;
+      padding:10px 20px;}
+nav ul {
+      flex-direction:column;
+      width:100%;
+      gap:5px;
+}                  
+.search-container {
+      width:100%;
+}
+#searchBox,#cancelBtn {
+      width:100%;
+}
+.menu-btn{
+   position: fixed;
+   top:100px ;
+}
+overlay-menu{
+   width: 100px;
+}
+.hero.contact {
+      background:#f0fdfa;
+      font--size:5px;
+      }
+
+}---------_-----------------------
+  
+   #link a{
+      
+      color: blue;
+   }
+    /* Menu Button */
+    .menu-btn {
+      font-size: 24px;
+      padding: 10px 20px;
+      cursor: pointer;
+      background:#1e3a8a ;
+      color: #e0f2fe;
+      border: none;
+      position: absolute;
+      top: 70px;
+     left: 0px;
+      z-index: 1002;
+      border-radius: 10px;
+      
+    }
+
+    /* Overlay Side Menu */
+    .overlay-menu {
+      height: 100%;
+      width: 200px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      
+      background:#e0f2fe;
+      z-index: 1000;
+      padding-top: 60px;
+      
+      /* Smooth slide */
+      transform: translateX(-100%);
+      transition: transform 0.4s ease;
+    }
+
+    /* Show menu */
+    .overlay-menu.active {
+      transform: translateX(0);
+    }
+
+    /* Links inside menu */
+    .overlay-menu a {
+    border-radius: 10px;
+      display: block;
+  25  padding: 12px 20px;
+      font-size: 20px;
+      color:#1e3a8a;
+      text-decoration: none;
+      margin-top:10px ;
+      transition: background 0.3s ease;
+    }
+
+    .overlay-menu a:hover {
+      background: #1e3a8a;
+      color: #e0f2fe;
+    }
+    #mainContent {
+  transition: margin-left 0.4s ease; /* smooth push */
+  margin-left: 0;
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<header>
+   <button class="menu-btn" onclick="toggleMenu()">☰ Menu</button>
+
+  <!-- Overlay Side Menu -->
+  <div id="sideMenu" class="overlay-menu">
+     <br>
+     <br>
+     <br>
+     <br>
+    <a href="#home"><i class="fa-solid fa-home"></i>Home</a>
+    
+    <a href="#mobiles"><i class="fa-solid fa-mobile"></i>Mobiles</a>
+    <a href="#about"><i class="fa-solid fa-person"></i>About</a>
+    <a href="#contact"><i class="fa-solid fa-phone"></i>Contact</a>
+  </div>
+  <div class="logo"><a href="sk1.html"><div class="img"></div></a></div>
+
+</header>
+<div id="mainContent">
+<!-- Main content Section -->
+<section class="hero" id="home">
+  <h1>Welcome to S.K. Mobile Hub</h1>
+  <p>Your one-stop destination for the latest smartphones and accessories.</p>
+  <button class="hand"><a href="https://hs-mine.netlify.app">2<sup>nd</sup> Hand Phones</a></button>
+</section>
+
+<!-- Showcase -->
+<section class="showcase" id="mobiles">
+  <h2>Our Mobile Collection</h2>
+  
+  <!-- Search inside showcase -->
+  <div class="search-container">
+    <input type="text" id="searchBox" placeholder="Search by product name...">
+    <button id="cancelBtn">Cancel</button>
+  </div>
+  
+  <div class="grid" id="itemList">
+    <div class="card">
+       <img src="/image/iPhone.jpg" alt="iPhone 14">
+       <h3>iPhone 14</h3>
+       <p>Premium Apple smartphone with advanced features.</p>
+       </div>
+       
+    <div class="card">
+       <img src="/image/iphone.jpg" alt="iPhone 16">
+       <h3>iPhone 16</h3>
+       <p>Premium Apple smartphone with advanced features.</p>
+       </div>
+       
+    <div class="card">
+       <img src="/image/ult.png" alt="Samsung S25 ultra">
+       <h3>Samsung Galaxy S25 ultra</h3>
+       <p>Flagship Android device with best camera quality and stunning display.</p>
+       </div>
+       
+    <div class="card">
+       <img src="/image/ult.png" alt="Samsung a55">
+       <h3>Samsung Galaxy A55</h3>
+       <p>Flagship Android device with best camera quality and stunning display.</p>
+       </div>
+       
+    <div class="card">
+       <img src="/image/Vivo.webp" alt="Vivo v60">
+       <h3>Vivo V60</h3>
+       <p>Best mobile with battery backup, camera quality, performance and sleek design.</p>
+       </div>
+       
+    <div class="card">
+       <img src="/image/plus.jpg" alt="Redmi Note 14 pro+">
+       <h3>Redmi Note 14 pro+</h3>
+       <p>Best smartphone with curve display and powerful features.</p>
+       </div>
+       
+  </div>
+  <div id="noResults">No results found</div>
+</section>
+
+<!-- About -->
+<section class="hero about" id="about">
+  <h1>About Us</h1>
+  <p>At S.K. Mobile Hub, we provide the latest smartphones at unbeatable prices with excellent customer support.<br><h2><b>Now with Dashain offer win a special gifts</b></h2></p>
+</section>
+
+<!-- Contact -->
+<section class="hero contact" id="contact">
+  <h1>Contact Us</h1>
+  <p >
+      <div id="link"><i class="fa-solid fa-location-dot"></i>Location:Jeetpur,Bara</a></div>
+       <div id="link"><i class="fa-solid fa-phone"></i>Phone<a  href="tel:+977-9800000000"> +977-9800000000</a></div>
+       
+        <div id="link"><i class="fa-solid fa-envelope"></i>Email:<a  href="mailto: skmobilehub@gmail.com">skmobilehub@gmail.com</a></div>
+        
+  <div id="link"><i class="fa-brands fa-facebook"></i>Facebook:<a  href="www.facebook.com">S.K. Mobile Hub</a></div>
+  
+   <div id="link"><i class="fa-bran ds fa-tiktok"></i>Tiktok: <a  href="www.tiktok.com"> S.K. Mobile Hub</a></div>
+   
+   </p>
+  <h3>by Gaurav Stha</h3>
+</section>
+</div>
+<!-- JS -->
+<script>
+const searchBox = document.getElementById("searchBox");
+const cancelBtn = document.getElementById("cancelBtn");
+const itemElements = Array.from(document.querySelectorAll("#itemList .card"));
+const noResults = document.getElementById("noResults");
+
+// Filter cards by product name
+function filterByName(query){
+  let found = false;
+  const lowerQuery = query.toLowerCase();
+  itemElements.forEach(card=>{
+    const productName = card.querySelector("h3").textContent.toLowerCase();
+    if(productName.includes(lowerQuery) && query!==""){
+      card.style.display="block";
+      found=true;
+    } else if(query==="") {
+      card.style.display="block";
+    } else {
+      card.style.display="none";
+    }
+  });
+  noResults.style.display = (!found && query!=="") ? "block":"none";
+}
+
+// Search input
+searchBox.addEventListener("input", function(){
+  filterByName(this.value);
+});
+
+// Cancel button
+cancelBtn.addEventListener("click", function(){
+  searchBox.value = "";
+  filterByName("");
+});    
+function toggleMenu() {
+      document.getElementById("sideMenu").classList.toggle("active");
+      }
+</script>
+</body>
+</html>
