@@ -426,11 +426,9 @@ function filterByName(query){
   const lowerQuery = query.toLowerCase();
   itemElements.forEach(card=>{
     const productName =card.querySelector("h3").textContent.toLowerCase();
-    if(productName.includes(lowerQuery) && query!==""){
-      card.style.display="block";
+    if(productName.includes(lowerQuery)){
+      card.style.display="";
       found=true;
-    } else if(query==="") {
-      card.style.display="block";
     } else {
       card.style.display="none";
     }
